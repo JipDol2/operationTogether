@@ -1,6 +1,6 @@
 const addLoginEvent = () =>{
   const loginFormSubmit = document.getElementById("login-form-submit");
-  loginFormSubmit.addEventListener("click");
+  loginFormSubmit.addEventListener("click",loginOperation);
 };
 
 const loginOperation = async (event) =>{
