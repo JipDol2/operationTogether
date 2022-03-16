@@ -1,9 +1,9 @@
-package com.yhproject.operation_together.sign;
+package com.yhproject.operation_together.member;
 
 import com.yhproject.operation_together.common.dto.EmptyJSON;
-import com.yhproject.operation_together.sign.dto.SignRequestDto;
-import com.yhproject.operation_together.sign.entity.Sign;
-import com.yhproject.operation_together.sign.entity.SignRepository;
+import com.yhproject.operation_together.member.dto.SignUpRequestDto;
+import com.yhproject.operation_together.member.entity.Member;
+import com.yhproject.operation_together.member.entity.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,14 +12,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class SignService {
+public class MemberService {
 
-    private final SignRepository signRepository;
+    private final MemberRepository memberRepository;
 
     @Transactional
-    public EmptyJSON join(SignRequestDto member){
+    public EmptyJSON join(SignUpRequestDto member){
         validateDuplicateMember(member);
-        signRepository.join(Sign.builder()
+        memberRepository.join(Member.builder()
                 .name(member.getName())
                 .userId(member.getUserId())
                 .password(member.getPassword())
@@ -27,9 +27,9 @@ public class SignService {
         return new EmptyJSON();
     }
     @Transactional
-    public void validateDuplicateMember(SignRequestDto member){
-        List<Sign> findSigns = signRepository.findByMember(member);
-        if(!findSigns.isEmpty()){
+    public void validateDuplicateMember(SignUpRequestDto member){
+        List<Member> findMembers = memberRepository.findByMember(member);
+        if(!findMembers.isEmpty()){
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
     }

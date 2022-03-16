@@ -1,5 +1,5 @@
 const addSignEvent= () => {
-    const signFormSubmit = document.getElementById("sign-form-submit");
+    const signFormSubmit = document.getElementById("signUp-form-submit");
     signFormSubmit.addEventListener("click",createSign);
 }
 const createSign = async (event) => {
@@ -13,7 +13,10 @@ const createSign = async (event) => {
         method: 'POST',
         body: JSON.stringify(SignDto)
     }
-    const response = await fetchData("/api/sign",header);
-    location.href = location.origin+`/login`;
+    const response = await fetchData("/api/member/signUp",header);
+    if(JSON.stringify(response)==='{}'){
+        return location.href = location.origin+`/login`;
+    }
+
 }
 addSignEvent();

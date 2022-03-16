@@ -1,4 +1,4 @@
-package com.yhproject.operation_together.sign.dto;
+package com.yhproject.operation_together.member.dto;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class SignRequestDto {
+public class SignUpRequestDto {
 
     private String name;
     private String userId;
     private String password;
 
     @Builder
-    public SignRequestDto(String name, String userId, String password){
+    public SignUpRequestDto(String name, String userId, String password){
         this.name=name;
         this.userId=userId;
         this.password=password;

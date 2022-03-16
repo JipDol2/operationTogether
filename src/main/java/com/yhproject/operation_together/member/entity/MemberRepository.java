@@ -1,6 +1,6 @@
-package com.yhproject.operation_together.sign.entity;
+package com.yhproject.operation_together.member.entity;
 
-import com.yhproject.operation_together.sign.dto.SignRequestDto;
+import com.yhproject.operation_together.member.dto.SignUpRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -9,17 +9,17 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-public class SignRepository {
+public class MemberRepository {
 
     private final EntityManager em;
 
-    public Long join(Sign member){
+    public Long join(Member member){
         em.persist(member);
         return member.getId();
     }
 
-    public List<Sign> findByMember(SignRequestDto member) {
-        return em.createQuery("SELECT s FROM Sign s WHERE s.userId=:userId",Sign.class)
+    public List<Member> findByMember(SignUpRequestDto member) {
+        return em.createQuery("SELECT m FROM Member m WHERE m.userId=:userId", Member.class)
                 .setParameter("userId",member.getUserId())
                 .getResultList();
     }

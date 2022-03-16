@@ -1,4 +1,4 @@
-package com.yhproject.operation_together.sign.entity;
+package com.yhproject.operation_together.member.entity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -10,9 +10,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Getter
-@Entity
 @RequiredArgsConstructor
-public class Sign {
+@Entity
+public class Member {
 
     @Id @GeneratedValue
     private Long id;
@@ -27,7 +27,7 @@ public class Sign {
     private String password;
 
     @Builder
-    private Sign(String name,String userId,String password){
+    private Member(String name, String userId, String password){
         this.name=name;
         this.userId=userId;
         this.password=password;
