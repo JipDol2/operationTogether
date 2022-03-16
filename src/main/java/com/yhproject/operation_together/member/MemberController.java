@@ -1,6 +1,7 @@
 package com.yhproject.operation_together.member;
 
 import com.yhproject.operation_together.common.dto.EmptyJSON;
+import com.yhproject.operation_together.member.dto.LoginRequestDto;
 import com.yhproject.operation_together.member.dto.SignUpRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,6 +15,10 @@ public class MemberController {
 
     private final MemberService memberService;
 
+   /* @PostMapping("/login")
+    public ResponseEntity<EmptyJSON> loginMember(@RequestBody LoginRequestDto loginRequestDto){
+        return ResponseEntity.status(HttpStatus.OK).body(memberService.login(loginRequestDto));
+    }*/
     @PostMapping("/signUp")
     public ResponseEntity<EmptyJSON> joinMember(@RequestBody SignUpRequestDto signUpRequestDto){
         return ResponseEntity.status(HttpStatus.OK).body(memberService.join(signUpRequestDto));

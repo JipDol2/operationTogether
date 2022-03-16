@@ -1,6 +1,7 @@
 package com.yhproject.operation_together.member;
 
 import com.yhproject.operation_together.common.dto.EmptyJSON;
+import com.yhproject.operation_together.member.dto.LoginRequestDto;
 import com.yhproject.operation_together.member.dto.SignUpRequestDto;
 import com.yhproject.operation_together.member.entity.Member;
 import com.yhproject.operation_together.member.entity.MemberRepository;
