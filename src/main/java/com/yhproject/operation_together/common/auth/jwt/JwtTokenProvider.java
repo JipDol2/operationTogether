@@ -16,6 +16,9 @@ public class JwtTokenProvider {
     @Value("${jwt.secret-key}")
     private String secretKey;
 
+    /**
+     * JWT Token 생성
+     */
     public String createJwtToken(Long id) {
         return Jwts.builder()
                 .claim("id", id)
@@ -25,6 +28,9 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    /**
+     * JWT Token 에 담겨 있는 값 추출
+     */
     public Long getOperationId(String token) {
         return Jwts.parser()
                 .setSigningKey(secretKey)
@@ -37,7 +43,7 @@ public class JwtTokenProvider {
         try {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
-        } catch (Exception e) {
+        } catch (Exception e) { /**JWT Token 이 만료되면 ExpiredJwtException Exception 이 자동으로 발생한다.*/
             return false;
         }
     }
