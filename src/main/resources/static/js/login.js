@@ -14,11 +14,14 @@ const loginOperation = async (event) =>{
     method: 'POST',
     body: JSON.stringify(loginDto),
   }
-  const response = await fetchData("/api/login",header);
-  //TODO: OperationService 에서 어떻게 값을 @build 를 사용해서 저장하는지 확인
-};
-
-const checkValiation = (dto) =>{
-  return true;
+  const response = await fetchData("/api/member/login",header);
+  const token = response.token;
+  if(token){
+    sessionStorage.setItem("Authorization",`Barear ${token}`);
+    location.href = location.origin+`/home`;
+  }else {
+    alert("아이디 및 비밀번호가 틀렸습니다.");
+    location.reload();
+  }
 };
 addLoginEvent();
