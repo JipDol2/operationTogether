@@ -1,13 +1,11 @@
-#login-form {
-    max-width: 300px;
-    margin: 0 auto;
-}
-
 #p1, #p2, #p3 {
     margin-right: .5rem;
     margin-bottom: 1rem;
 }
 
-#login-form-submit {
+#logout-form-submit {
+    margin: 0 auto;
+}
+#create-form-submit {
     margin: 0 auto;
 }

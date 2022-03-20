@@ -30,6 +30,11 @@ public class IndexController {
         return "create";
     }
 
+    @GetMapping("/home")
+    public String home(){
+        return "home";
+    }
+
     @GetMapping("/operations/{link}")
     public String operation(Model model, @PathVariable String link) {
         OperationResponseDto operation = operationService.getOperation(link);

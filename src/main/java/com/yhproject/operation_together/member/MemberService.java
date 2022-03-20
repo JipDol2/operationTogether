@@ -40,7 +40,7 @@ public class MemberService {
     }
 
     /**
-     * 로그인을 하면 Token을 받는다
+     * 로그인을 하면 Token을 받는다.
      */
     @Transactional
     public LoginResponseDto login(LoginRequestDto loginRequestDto) {

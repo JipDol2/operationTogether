@@ -6,10 +6,10 @@ const addLoginEvent = () =>{
 const loginOperation = async (event) =>{
   event.preventDefault();
   const loginDto={
-    id: document.getElementById("id").value,
+    userId: document.getElementById("id").value,
     password: document.getElementById("password").value,
   }
-  if(!checkValidation(loginDto))return;
+  //if(!checkValidation(loginDto))return;
   const header ={
     method: 'POST',
     body: JSON.stringify(loginDto),

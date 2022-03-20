@@ -2,7 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <th:block th:replace="fragments/header.html :: header-fragment"></th:block>
-    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
 <div class="container h-100">
@@ -10,11 +10,14 @@
         <div class="jumbotron align-self-center">
             <h1 class="text-center"><b>작전명 <span class="highlight">투게더</span>!</b></h1>
             <p class="text-center">친구들과 함께 당신의 작전을 만들어보세요.</p>
-            <p class="text-center"><a href="/logout" class="btn btn-primary btn-lg">로그아웃</a></p>
-            <p class="text-center"><a href="/create" class="btn btn-primary btn-lg">작전 만들기</a></p>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button type="submit" id="logout-form-submit" class="btn btn-primary text-center w-100">로그아웃</button>
+                <button type="submit" id="create-form-submit" class="btn btn-primary text-center w-100">작전 만들기</button>
+            </div>
         </div>
     </div>
 </div>
 <th:block th:replace="fragments/footer.html :: footer-fragment"></th:block>
 </body>
+<script src="/js/home.js"></script>
 </html>
