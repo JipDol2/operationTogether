@@ -25,6 +25,9 @@ public class OperationService {
         return new OperationSaveResponseDto(newOperationLink);
     }
 
+    /**
+     * link 생성
+     */
     private String createLink() {
         // 난수 링크 생성
         String candidate = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -63,6 +66,9 @@ public class OperationService {
                 .build();
     }
 
+    /**
+     * password 체킹 (jwt token 생성)
+     */
     public PasswordResponseDto checkPassword(String link, PasswordRequestDto dto) {
         Operation operation = operationRepository.findByLink(link).orElseThrow(() -> new IllegalArgumentException("해당 작전이 없습니다."));
         String correctPassword = operation.getPassword();
