@@ -10,9 +10,13 @@ import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 @Getter
+/**
+ * @MpaaerSuperclass : 공통 매핑 정보가 필요할때 사용한다. createDate 와 modifiedDate는 지속적으로 사용되는 변수여서 BaseEntity 로 선언한 뒤 상속을 받게 한다.
+ * 조회 및 검색이 불가하고 직접 생성해서 사용할 일이 없기 때문에 추상 클래스(abstract class)로 만드는 것이 좋다.
+ */
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseTimeEntity {
+public abstract class BaseTimeEntity {
 
     @CreatedDate
     private LocalDateTime createdDate;
