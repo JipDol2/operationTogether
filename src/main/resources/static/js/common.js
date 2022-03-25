@@ -16,6 +16,14 @@ const fetchData = async (url, option) => {
     }
 }
 
+const checkLogin = () => {
+    const token = sessionStorage.getItem("Authorization");
+    if(token==null){
+        return false;
+    }
+    return true;
+}
+
 const getLink = () => {
     return location.pathname.split('/')[2];
 }

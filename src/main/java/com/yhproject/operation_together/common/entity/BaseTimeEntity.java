@@ -17,7 +17,8 @@ import java.time.LocalDateTime;
 /**
  * @EntityListeners(AuditingEntityListener.class) : Spring Data JPA 에서 지원해주는 기능으로 생성일,수정일과 같은 기록들을 편리하게 관리할 수 있도록 지원해준다.
  * Audit 기능 : spring data jpa 에서 시간에 대한 정보들을 자동으로 넣어주는 기능
- * @CreatedDate :
+ * @CreatedDate : Entity가 생성되어 저장될 때 시간이 자동 저장
+ * @LastModifiedDate : 조회한 Entity의 값을 변경할 때 시간이 자동 저장
  */
 @Getter
 @MappedSuperclass
