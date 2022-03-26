@@ -20,10 +20,14 @@ public class IndexController {
     }
 
     @GetMapping("/login")
-    public String login(){return "login";}
+    public String login(){
+        return "login";
+    }
 
     @GetMapping("/signUp")
-    public String sign(){ return "signUp"; }
+    public String sign(){
+        return "signUp";
+    }
 
     @GetMapping("/create")
     public String create() {

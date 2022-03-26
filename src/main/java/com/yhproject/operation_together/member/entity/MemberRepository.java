@@ -31,10 +31,14 @@ public class MemberRepository {
      * Optional + JPQL
      */
     public Optional<Member> findByMemberOne(LoginRequestDto memberDto){
-        Member member = em.createQuery("SELECT m FROM Member m WHERE m.userId=:userId AND m.password=:password",Member.class)
+        List<Member> member = em.createQuery("SELECT m FROM Member m WHERE m.userId=:userId AND m.password=:password",Member.class)
                 .setParameter("userId",memberDto.getUserId())
                 .setParameter("password",memberDto.getPassword())
-                .getSingleResult();
-        return Optional.ofNullable(member);
+                .getResultList();
+        if(member.isEmpty()){
+            return Optional.empty();
+        }else {
+            return member.stream().findFirst();
+        }
     }
 }

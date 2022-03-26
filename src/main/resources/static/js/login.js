@@ -14,13 +14,15 @@ const loginOperation = async (event) =>{
     method: 'POST',
     body: JSON.stringify(loginDto),
   }
-  const response = await fetchData("/api/member/login",header);
-  const token = response.token;
-  if(token){
-    sessionStorage.setItem("Authorization",`Barear ${token}`);
-    location.href = location.origin+`/home`;
-  }else {
-    alert("아이디 및 비밀번호가 틀렸습니다.");
+  try{
+    const response = await fetchData("/api/member/login",header);
+    const token = response.token;
+    if(token){
+      sessionStorage.setItem("Authorization",`Barear ${token}`);
+      location.href = location.origin+`/home`;
+    }
+  }catch(e){
+    alert(e);
     location.reload();
   }
 };
