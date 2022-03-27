@@ -59,5 +59,4 @@ public class IndexController {
         model.addAttribute("operation", operation);
         return "result";
     }
-
 }
