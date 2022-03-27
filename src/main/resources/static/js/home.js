@@ -11,7 +11,7 @@ const addHomeEvent = () =>{
 const logoutOperation = (event) =>{
     event.preventDefault();
     sessionStorage.clear();
-    location.href=location.origin+`/index`;
+    location.href=location.origin+`/`;
 };
 
 const createOperation = () => {
