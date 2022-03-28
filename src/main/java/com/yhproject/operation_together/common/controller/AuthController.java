@@ -1,5 +1,6 @@
 package com.yhproject.operation_together.common.controller;
 
+import com.yhproject.operation_together.common.dto.EmptyJSON;
 import com.yhproject.operation_together.input.InputService;
 import com.yhproject.operation_together.input.dto.InputResponseDto;
 import com.yhproject.operation_together.input.dto.ResultDto;

@@ -21,11 +21,12 @@ const loginOperation = async (event) =>{
       sessionStorage.setItem("Authorization",`Bearer ${token}`);
 
       const form = document.createElement('form');
-
       form.action=`/home`;
       form.method=`POST`;
-      form.innerHTML = "<input name='Authorization' value=" + token +">";
-      document.body.appendChild(form);
+      form.innerHTML = "<input name='Authorization' value='" + `Bearer ` + token + "'>";
+
+      document.body.append(form);
+
       form.submit();
     }
   }catch(e){
