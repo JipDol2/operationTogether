@@ -23,19 +23,10 @@ const loginOperation = async (event) =>{
       const form = document.createElement('form');
 
       form.action=`/home`;
-      console.log(form.action);
       form.method=`POST`;
-      form.setAttribute("Authorization",token);
-      console.log(form.getAttribute("Authorization"));
+      form.innerHTML = "<input name='Authorization' value=" + token +">";
       document.body.appendChild(form);
       form.submit();
-
-      /*const tokenDto = {
-        method : 'GET',
-        token : token
-      }
-      const res = await fetchData("/home",tokenDto);*/
-      //location.href = location.origin+`/home`;
     }
   }catch(e){
     alert(e);
