@@ -18,8 +18,24 @@ const loginOperation = async (event) =>{
     const response = await fetchData("/api/member/login",header);
     const token = response.token;
     if(token){
-      sessionStorage.setItem("Authorization",`Barear ${token}`);
-      location.href = location.origin+`/home`;
+      sessionStorage.setItem("Authorization",`Bearer ${token}`);
+
+      const form = document.createElement('form');
+
+      form.action=`/home`;
+      console.log(form.action);
+      form.method=`POST`;
+      form.setAttribute("Authorization",token);
+      console.log(form.getAttribute("Authorization"));
+      document.body.appendChild(form);
+      form.submit();
+
+      /*const tokenDto = {
+        method : 'GET',
+        token : token
+      }
+      const res = await fetchData("/home",tokenDto);*/
+      //location.href = location.origin+`/home`;
     }
   }catch(e){
     alert(e);
