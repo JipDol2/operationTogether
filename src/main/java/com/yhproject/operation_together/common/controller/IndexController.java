@@ -35,7 +35,7 @@ public class IndexController {
         return "create";
     }
 
-    @PostMapping("/home")
+    @GetMapping("/home")
     public String home(){
         return "home";
     }

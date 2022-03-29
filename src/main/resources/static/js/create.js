@@ -7,10 +7,6 @@ const addCreateEvent = () => {
 
 const createOperation = async (event) => {
     event.preventDefault(); //=>submit 으로 인해 reload가 되는 것을 방지해주는 목적으로 사용
-    if(!checkLogin()){
-        alert("로그인부터 하세요.");
-        return;
-    }
     const operationSaveDto = {
         name: document.getElementById('name').value,
         password: document.getElementById('password').value,

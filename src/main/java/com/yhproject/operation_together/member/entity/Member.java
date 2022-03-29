@@ -26,6 +26,7 @@ public class Member {
     @Column(length = 20, nullable = false)
     private String password;
 
+
     @Builder
     private Member(String name, String userId, String password){
         this.name=name;

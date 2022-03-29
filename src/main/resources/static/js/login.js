@@ -19,15 +19,7 @@ const loginOperation = async (event) =>{
     const token = response.token;
     if(token){
       sessionStorage.setItem("Authorization",`Bearer ${token}`);
-
-      const form = document.createElement('form');
-      form.action=`/home`;
-      form.method=`POST`;
-      form.innerHTML = "<input name='Authorization' value='" + `Bearer ` + token + "'>";
-
-      document.body.append(form);
-
-      form.submit();
+      location.href = location.origin+'/home';
     }
   }catch(e){
     alert(e);
