@@ -19,7 +19,11 @@ const loginOperation = async (event) =>{
     const token = response.token;
     if(token){
       sessionStorage.setItem("Authorization",`Bearer ${token}`);
-      location.href = location.origin+'/home';
+      //location.href = location.origin+'/home';
+      const form = new FormData();
+      form.append("Authorization",token);
+      const res = navigator.sendBeacon(location.origin+`/home`,form);
+      console.log(res);
     }
   }catch(e){
     alert(e);

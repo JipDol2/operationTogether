@@ -23,14 +23,15 @@ public class JwtTokenInterceptor implements HandlerInterceptor {
         }
 
         String requestURI = request.getRequestURI();
-        String token = requestURI.equals("/home")?request.getParameter("Authorization"):request.getHeader("Authorization");
-        if(token==null){
+        String token1 = request.getParameter("Authorization");
+        String token2 = request.getHeader("Authorization");
+        /*if(token==null){
             response.sendRedirect("/login");
             throw new IllegalArgumentException("로그인 먼저 해주세요.");
         }
         if(!jwtTokenProvider.validateToken(token.substring(7))){
             throw new IllegalArgumentException("유효하지 않은 토큰");
-        }
+        }*/
         return true;
     }
 
