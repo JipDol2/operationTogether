@@ -1,4 +1,5 @@
 const addCreateEvent = () => {
+    needAuth();
     document.getElementById('operation-date').value = new Date().toISOString().slice(0, 10);
 
     const operationFormSubmit = document.getElementById('operation-form-submit');

@@ -17,12 +17,11 @@ const fetchData = async (url, option) => {
     }
 }
 
-const checkLogin = () => {
-    const token = sessionStorage.getItem("Authorization");
-    if(token==null){
-        return false;
+const needAuth = () => {
+    const auth = sessionStorage.getItem("Authorization");
+    if(auth==null){
+        location.href = location.origin + `/login`;
     }
-    return true;
 }
 
 const getLink = () => {

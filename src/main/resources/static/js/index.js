@@ -1,13 +1,21 @@
-const addHomeEvent = () =>{
-    //1. 로그아웃 버튼을 클릭
-    //2. 작전 만들기 버튼을 클릭
+const addIndexEvent = () => {
+    isLoginCheck();
     const logoutButton = document.getElementById("logout-button");
     const createButton = document.getElementById("create-button");
 
     logoutButton.addEventListener("click",logoutOperation);
     createButton.addEventListener("click",createOperation);
-};
+}
+const isLoginCheck = () => {
+    const logoutState = document.getElementById("logoutState");
+    const loginState = document.getElementById("loginState");
 
+    const token = sessionStorage.getItem("Authorization");
+    if(token!==null){
+        logoutState.style.display="none";
+        loginState.style.display="block";
+    }
+}
 const logoutOperation = (event) =>{
     event.preventDefault();
     sessionStorage.clear();
@@ -17,4 +25,4 @@ const logoutOperation = (event) =>{
 const createOperation = () => {
     location.href = location.origin+`/create`;
 }
-addHomeEvent();
+addIndexEvent();
