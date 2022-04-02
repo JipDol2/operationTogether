@@ -28,7 +28,8 @@ const loginOperation = async (event) =>{
       location.href = location.origin+'/';
     }
   }catch(e){
-    alert(e);
+    //alert으로 할게 아니라 create.html을 참고하면 에러문구를 출력하게끔 하는것이 더 좋은 방법인듯 하다.
+    alert("아이디 혹은 비밀번호의 입력이 잘못되었습니다!");
     location.reload();
   }
 };

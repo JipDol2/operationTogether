@@ -9,6 +9,7 @@ const createSign = async (event) => {
         userId: document.getElementById("id").value,
         password: document.getElementById("password").value,
     };
+    //checkValidation
     const header = {
         method: 'POST',
         body: JSON.stringify(SignDto)
