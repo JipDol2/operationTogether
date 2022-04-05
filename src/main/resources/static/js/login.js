@@ -1,6 +1,7 @@
 const addLoginEvent = () =>{
   checkToken();
   const loginFormSubmit = document.getElementById("login-form-submit");
+
   loginFormSubmit.addEventListener("click",loginOperation);
 };
 
@@ -28,8 +29,9 @@ const loginOperation = async (event) =>{
       location.href = location.origin+'/';
     }
   }catch(e){
-    //alert으로 할게 아니라 create.html을 참고하면 에러문구를 출력하게끔 하는것이 더 좋은 방법인듯 하다.
-    //alert("아이디 혹은 비밀번호의 입력이 잘못되었습니다!");
+    const passwordInput = document.getElementById("password");
+    passwordInput.value = null;
+    passwordInput.focus();
 
     const errorMessage = document.getElementById('error-message');
     errorMessage.innerHTML="아이디 또는 비밀번호를 잘못 입력했습니다.\n입력하신 내용을 다시 확인해주세요."
