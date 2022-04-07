@@ -6,6 +6,7 @@ const addIndexEvent = () => {
     logoutButton.addEventListener("click",logoutOperation);
     createButton.addEventListener("click",createOperation);
 }
+
 const isLoginCheck = () => {
     const logoutState = document.getElementById("logoutState");
     const loginState = document.getElementById("loginState");
@@ -22,7 +23,9 @@ const logoutOperation = (event) =>{
     location.href=location.origin+`/`;
 };
 
-const createOperation = () => {
-    location.href = location.origin+`/create`;
+const createOperation = async (event) => {
+    event.preventDefault();
+
+    //location.href = location.origin+`/create`;
 }
 addIndexEvent();
