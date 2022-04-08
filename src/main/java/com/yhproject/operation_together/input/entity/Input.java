@@ -2,6 +2,7 @@ package com.yhproject.operation_together.input.entity;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.yhproject.operation_together.common.entity.BaseTimeEntity;
+import com.yhproject.operation_together.member.entity.Member;
 import com.yhproject.operation_together.operation.entity.Operation;
 import lombok.Builder;
 import lombok.Getter;

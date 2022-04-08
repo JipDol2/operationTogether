@@ -1,18 +1,20 @@
 package com.yhproject.operation_together.member.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.yhproject.operation_together.common.entity.BaseTimeEntity;
+import com.yhproject.operation_together.input.entity.Input;
+import com.yhproject.operation_together.operation.entity.Operation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
 @Entity
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id @GeneratedValue
     private Long id;
@@ -26,6 +28,9 @@ public class Member {
     @Column(length = 20, nullable = false)
     private String password;
 
+    @OneToMany(mappedBy = "member")
+    @JsonBackReference
+    private List<Operation> operations;
 
     @Builder
     private Member(String name, String userId, String password){

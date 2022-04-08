@@ -3,6 +3,7 @@ package com.yhproject.operation_together.operation.entity;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.yhproject.operation_together.common.entity.BaseTimeEntity;
 import com.yhproject.operation_together.input.entity.Input;
+import com.yhproject.operation_together.member.entity.Member;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,9 @@ public class Operation extends BaseTimeEntity {
     @Column(nullable = false)
     private LocalDate operationDate;
 
+    @ManyToOne
+    @JoinColumn(name="member_id")
+    private Member member;
 
     @OneToMany(mappedBy = "operation")
     @JsonBackReference
