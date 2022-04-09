@@ -25,7 +25,6 @@ const logoutOperation = (event) =>{
 
 const createOperation = async (event) => {
     event.preventDefault();
-
-    //location.href = location.origin+`/create`;
+    location.href = location.origin+`/create`;
 }
 addIndexEvent();

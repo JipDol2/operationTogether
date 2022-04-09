@@ -12,6 +12,7 @@ const createOperation = async (event) => {
         name: document.getElementById('name').value,
         password: document.getElementById('password').value,
         operationDate: document.getElementById('operation-date').value,
+        id: sessionStorage.getItem("Id")
     };
     if (!checkValidation(operationSaveDto)) return;
     const header = {

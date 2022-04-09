@@ -24,8 +24,10 @@ const loginOperation = async (event) =>{
   try{
     const response = await fetchData("/api/member/login",header);
     const token = response.token;
+    const id = response.id;
     if(token){
       sessionStorage.setItem("Authorization",`Bearer ${token}`);
+      sessionStorage.setItem("Id",id);
       location.href = location.origin+'/';
     }
   }catch(e){

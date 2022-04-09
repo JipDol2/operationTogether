@@ -18,6 +18,5 @@ const createSign = async (event) => {
     if(JSON.stringify(response)==='{}'){
         return location.href = location.origin+`/login`;
     }
-
 }
 addSignEvent();
