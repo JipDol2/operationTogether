@@ -21,6 +21,10 @@ public class MemberRepository {
         return member.getId();
     }
 
+    public Optional<Member> findByMember(Long id){
+        return Optional.ofNullable(em.find(Member.class,id));
+    }
+
     public List<Member> findByMemberID(SignUpRequestDto memberDto) {
         return em.createQuery("SELECT m FROM Member m WHERE m.userId=:userId", Member.class)
                 .setParameter("userId",memberDto.getUserId())
