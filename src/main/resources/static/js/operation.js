@@ -27,13 +27,17 @@ const checkPassword = async () => {
     };
     const link = getLink();
     const response = await fetchData(`/api/operations/${link}`, header);
-    const token = response.token;
-    if (token) {
-        sessionStorage.setItem("Authorization", `Bearer ${token}`);
+    const flag = response.flag;
+    if (flag) {
+        //sessionStorage.setItem("Authorization", `Bearer ${token}`);
         location.href = location.origin + `/operations/${link}/result`;
     } else {
-        alert('비밀번호가 틀렸습니다.');
-        location.reload();
+        //alert('비밀번호가 틀렸습니다.');
+        const passwordInput = document.getElementById("operation-password");
+        passwordInput.value=null;
+        const errorMessage = document.getElementById("error-message");
+        errorMessage.innerHTML="비밀번호를 잘못 입력하셨습니다."
+        //location.reload();
     }
 }
 

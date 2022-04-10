@@ -8,8 +8,7 @@
     <div class="row align-items-center h-100">
         <div class="jumbotron align-self-center align-items-center" th:object="${operation}">
             <h1 class="text-center mb-3">
-                <span class="text-primary" th:text="*{name}"></span>님은<br>
-                <span class="text-primary" th:text="*{operationKoDate}"></span>에
+                <span class="text-primary" th:text="*{name}"></span>님의 작전게임!!<br>
             </h1>
             <h3 class="operation-format text-center border border-secondary mb-3 p-2">
                 <span class="text-primary">???</span>와(과)
@@ -34,6 +33,7 @@
                             </div>
                             <div class="modal-body">
                                 <input type="password" id="operation-password" name="password" class="form-control" autocomplete="on" />
+                                <p id="error-message" class="text-danger"></p>
                             </div>
                             <div class="modal-footer">
                                 <button id="btn-password" class="btn btn-primary">확인</button>

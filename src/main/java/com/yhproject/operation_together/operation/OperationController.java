@@ -6,6 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequestMapping("/api/operations")
 @RestController
 @RequiredArgsConstructor
@@ -27,5 +29,4 @@ public class OperationController {
     public ResponseEntity<PasswordResponseDto> checkPassword(@PathVariable String link, @RequestBody PasswordRequestDto dto) {
         return ResponseEntity.status(HttpStatus.OK).body(operationService.checkPassword(link, dto));
     }
-
 }

@@ -1,5 +1,9 @@
 package com.yhproject.operation_together.operation;
 
+import antlr.StringUtils;
+import com.yhproject.operation_together.member.entity.Member;
+import com.yhproject.operation_together.member.entity.MemberJpaRepository;
+import com.yhproject.operation_together.member.entity.MemberRepository;
 import com.yhproject.operation_together.operation.dto.*;
 import com.yhproject.operation_together.common.auth.jwt.JwtTokenProvider;
 import com.yhproject.operation_together.operation.entity.Operation;
@@ -8,21 +12,24 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class OperationService {
 
+    private final MemberRepository memberRepository;
     private final OperationRepository operationRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Transactional
     public OperationSaveResponseDto createOperation(OperationSaveRequestDto dto) {
-        dto.setLink(createLink());
-        String newOperationLink = operationRepository.save(dto.toEntity()).getLink();
-        return new OperationSaveResponseDto(newOperationLink);
+        Member member = memberRepository.findById(dto.getId()).orElseThrow(()->new IllegalArgumentException("해당 회원을 찾을 수 없습니다."));
+        member.setLink(createLink());
+        return new OperationSaveResponseDto(member.getLink());
     }
 
     /**
@@ -37,8 +44,8 @@ public class OperationService {
                 int index = (int) (Math.random() * candidate.length());
                 link.append(candidate.charAt(index));
             }
-            Optional<Operation> operation = operationRepository.findByLink(link.toString());
-            if (operation.isPresent()) {
+            Optional<Member> member = memberRepository.findByLink(link.toString());
+            if (member.isPresent()) {
                 link = new StringBuilder();
                 continue;
             }
@@ -47,12 +54,12 @@ public class OperationService {
     }
 
     public OperationResponseDto getOperation(String link) {
-        Operation operation = operationRepository.findByLink(link).orElseThrow(() -> new IllegalArgumentException("해당 작전이 없습니다."));
+        //Operation operation = operationRepository.findByLink(link).orElseThrow(() -> new IllegalArgumentException("해당 작전이 없습니다."));
+        Member member = memberRepository.findByLink(link).orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다."));
         return OperationResponseDto.builder()
-                .id(operation.getId())
-                .name(operation.getName())
-                .link(operation.getLink())
-                .operationDate(operation.getOperationDate())
+                .id(member.getId())
+                .name(member.getName())
+                .link(member.getLink())
                 .build();
     }
 
@@ -62,22 +69,37 @@ public class OperationService {
                 .id(operation.getId())
                 .name(operation.getName())
                 .link(operation.getLink())
-                .operationDate(operation.getOperationDate())
                 .build();
     }
 
+    public List<OperationResponseDto> getOperationList(Long id){
+        List<Operation> operationsList = operationRepository.findByOperations(id);
+        if(operationsList.size()<=0){
+            throw new IllegalArgumentException("해당 작전이 없습니다");
+        }
+        return operationsList.stream()
+                .map(opearation->OperationResponseDto.builder()
+                        .id(opearation.getId())
+                        .name(opearation.getName())
+                        .link(opearation.getLink())
+                        .build()
+                )
+                .collect(Collectors.toList());
+    }
+
     /**
-     * password 체킹 (jwt token 생성)
+     * password 체킹
      */
     public PasswordResponseDto checkPassword(String link, PasswordRequestDto dto) {
-        Operation operation = operationRepository.findByLink(link).orElseThrow(() -> new IllegalArgumentException("해당 작전이 없습니다."));
-        String correctPassword = operation.getPassword();
-        boolean isCorrect = Objects.equals(correctPassword, dto.getPassword());
+        //Operation operation = operationRepository.findByLink(link).orElseThrow(() -> new IllegalArgumentException("해당 작전이 없습니다."));
+        Member member = memberRepository.findByLink(link).orElseThrow(()->new IllegalArgumentException("해당 회원이 없습니다."));
+        String correctPassword = member.getPassword();
+        boolean isCorrect = correctPassword.equals(dto.getPassword());
+        //boolean isCorrect = Objects.equals(correctPassword, dto.getPassword());
         if (isCorrect) {
-            String jwtToken = jwtTokenProvider.createJwtToken(operation.getId());
-            return new PasswordResponseDto(jwtToken);
+            //String jwtToken = jwtTokenProvider.createJwtToken(member.getId());
+            return new PasswordResponseDto("true");
         }
         return new PasswordResponseDto(null);
     }
-
 }

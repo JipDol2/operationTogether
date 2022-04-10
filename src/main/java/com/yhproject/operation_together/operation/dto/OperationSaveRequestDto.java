@@ -11,32 +11,25 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class OperationSaveRequestDto {
 
-    private String name;
-    private String password;
-    private String link;
-    private LocalDate operationDate;
-    private int type;
+    private Long id;
 
     @Builder
-    public OperationSaveRequestDto(String name, String password, LocalDate operationDate, int type) {
-        this.name = name;
-        this.password = password;
-        this.operationDate = operationDate;
-        this.type = type;
+    public OperationSaveRequestDto(Long id) {
+        this.id=id;
     }
 
-    public void setLink(String link) {
+    /*public void setLink(String link) {
         this.link = link;
-    }
+    }*/
 
     // DTO -> Entity
-    public Operation toEntity() {
+    /*public Operation toEntity() {
         return Operation.builder()
                 .name(name)
                 .password(password)
                 .link(link)
                 .operationDate(operationDate)
                 .build();
-    }
+    }*/
 
 }

@@ -6,13 +6,14 @@ import com.yhproject.operation_together.input.entity.Input;
 import com.yhproject.operation_together.operation.entity.Operation;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Member extends BaseTimeEntity {
 
@@ -28,14 +29,22 @@ public class Member extends BaseTimeEntity {
     @Column(length = 20, nullable = false)
     private String password;
 
+    @Column(length = 16)
+    private String link;
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
     @OneToMany(mappedBy = "member")
     @JsonBackReference
-    private List<Operation> operations;
+    private List<Input> inputs;
 
     @Builder
-    private Member(String name, String userId, String password){
+    private Member(String name, String userId, String password,String link){
         this.name=name;
         this.userId=userId;
         this.password=password;
+        this.link=link;
     }
 }

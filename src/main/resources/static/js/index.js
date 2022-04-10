@@ -17,6 +17,7 @@ const isLoginCheck = () => {
         loginState.style.display="block";
     }
 }
+
 const logoutOperation = (event) =>{
     event.preventDefault();
     sessionStorage.clear();
@@ -25,6 +26,16 @@ const logoutOperation = (event) =>{
 
 const createOperation = async (event) => {
     event.preventDefault();
-    location.href = location.origin+`/create`;
-}
+    const operationSaveDto = {
+        id: sessionStorage.getItem("Id")
+    };
+    const header={
+        method: 'POST',
+        body: JSON.stringify(operationSaveDto)
+    }
+    const response = await fetchData("/api/operations",header);
+    const link = response.link;
+    location.href = location.origin + `/operations/${link}`;
+};
+
 addIndexEvent();

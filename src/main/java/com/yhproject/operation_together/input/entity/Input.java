@@ -30,13 +30,20 @@ public class Input extends BaseTimeEntity {
 
     @ManyToOne
     @JsonManagedReference
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    /*@ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "operation_id")
-    private Operation operation;
+    private Operation operation;*/
 
     @Builder
-    private Input(String name, List<String> contents, Operation operation) {
+    private Input(String name, List<String> contents, Member member) {
         this.name = name;
         this.contents = contents;
-        this.operation = operation;
+        this.member = member;
+        member.getInputs().add(this);
+        //this.operation = operation;
     }
 }

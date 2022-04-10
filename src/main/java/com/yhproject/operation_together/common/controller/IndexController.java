@@ -1,5 +1,6 @@
 package com.yhproject.operation_together.common.controller;
 
+import com.yhproject.operation_together.member.entity.Member;
 import com.yhproject.operation_together.operation.OperationService;
 import com.yhproject.operation_together.operation.dto.OperationResponseDto;
 import lombok.RequiredArgsConstructor;

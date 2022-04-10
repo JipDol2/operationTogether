@@ -21,9 +21,9 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.OK).body(inputService.getInputs(operationId, link));
     }
 
-    @GetMapping("/operations/{link}/result")
+/*    @GetMapping("/operations/{link}/result")
     public ResponseEntity<ResultDto> getResponse(@RequestAttribute("operationId") Long operationId, @PathVariable String link) {
         return ResponseEntity.status(HttpStatus.OK).body(inputService.getResponse(operationId, link));
-    }
+    }*/
 
 }

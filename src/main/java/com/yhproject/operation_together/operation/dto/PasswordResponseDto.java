@@ -7,6 +7,6 @@ import lombok.Getter;
 @AllArgsConstructor
 public class PasswordResponseDto {
 
-    private final String token;
+    private final String flag;
 
 }

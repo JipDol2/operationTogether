@@ -4,6 +4,8 @@ import com.yhproject.operation_together.input.dto.*;
 import com.yhproject.operation_together.common.dto.EmptyJSON;
 import com.yhproject.operation_together.input.entity.Input;
 import com.yhproject.operation_together.input.entity.InputRepository;
+import com.yhproject.operation_together.member.entity.Member;
+import com.yhproject.operation_together.member.entity.MemberRepository;
 import com.yhproject.operation_together.operation.entity.Operation;
 import com.yhproject.operation_together.operation.entity.OperationRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,33 +20,34 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InputService {
 
-    private final OperationRepository operationRepository;
+    //private final OperationRepository operationRepository;
+    private final MemberRepository memberRepository;
     private final InputRepository inputRepository;
 
     @Transactional
     public EmptyJSON createInput(String link, InputSaveRequestDto dto) {
-        Operation operation = operationRepository.findByLink(link)
+        Member member = memberRepository.findByLink(link)
                 .orElseThrow(() -> new IllegalArgumentException("해당 작전이 없습니다."));
         inputRepository.save(Input.builder()
                 .name(dto.getName())
                 .contents(dto.getContents())
-                .operation(operation)
+                .member(member)
                 .build());
         return new EmptyJSON();
     }
 
     @Transactional(readOnly = true)
     public InputResponseDto getInputs(Long operationId, String link) {
-        Operation operation = getAuthOperation(operationId, link);
-        List<InputResponseForm> inputs = operation.getInputs()
+        Member member = getAuthOperation(operationId, link);
+        List<InputResponseForm> inputs = member.getInputs()
                 .stream()
                 .map(this::transformEntityToDto)
                 .collect(Collectors.toList());
         return new InputResponseDto(inputs);
     }
 
-    private Operation getAuthOperation(Long operationId, String link) {
-        return operationRepository.findByIdAAndLink(operationId, link)
+    private Member getAuthOperation(Long operationId, String link) {
+        return memberRepository.findByIdAAndLink(operationId, link)
                 .orElseThrow(() -> new IllegalArgumentException("해당 작전이 없습니다."));
     }
 
@@ -56,7 +59,7 @@ public class InputService {
                 .build();
     }
 
-    @Transactional(readOnly = true)
+/*    @Transactional(readOnly = true)
     public ResultDto getResponse(Long operationId, String link) {
         Operation operation = getAuthOperation(operationId, link);
         List<Input> inputs = operation.getInputs();
@@ -71,5 +74,5 @@ public class InputService {
             );
         }
         return new ResultDto(result);
-    }
+    }*/
 }

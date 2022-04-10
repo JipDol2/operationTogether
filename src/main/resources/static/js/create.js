@@ -45,6 +45,7 @@ const isValidName = (name) => {
 
 const isValidPassword = (password) => {
     if (!password || password.length < 4 || password.length > 12) return false;
+    /**^w : word 를 표현하며 알파벳 + 숫자 + _ 중의 한 문자임을 의미한다.*/
     if (/[^\w]/.test(password)) return false;
     return true;
 };
