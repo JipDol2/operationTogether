@@ -8,13 +8,13 @@ const addIndexEvent = () => {
 }
 
 const isLoginCheck = () => {
-    const logoutState = document.getElementById("logoutState");
-    const loginState = document.getElementById("loginState");
-
     const token = sessionStorage.getItem("Authorization");
     if(token!==null){
-        logoutState.style.display="none";
-        loginState.style.display="block";
+        const logoutState = document.getElementById("logoutState");
+        logoutState.classList.toggle("d-none");
+
+        const loginState = document.getElementById("loginState");
+        loginState.classList.toggle("d-none");
     }
 }
 
