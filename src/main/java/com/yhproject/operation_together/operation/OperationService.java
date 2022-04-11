@@ -63,14 +63,14 @@ public class OperationService {
                 .build();
     }
 
-    public OperationResponseDto getOperation(Long id) {
+/*    public OperationResponseDto getOperation(Long id) {
         Operation operation = operationRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 작전이 없습니다."));
         return OperationResponseDto.builder()
                 .id(operation.getId())
                 .name(operation.getName())
                 .link(operation.getLink())
                 .build();
-    }
+    }*/
 
     public List<OperationResponseDto> getOperationList(Long id){
         List<Operation> operationsList = operationRepository.findByOperations(id);

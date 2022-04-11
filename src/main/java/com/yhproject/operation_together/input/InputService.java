@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class InputService {
 
-    //private final OperationRepository operationRepository;
     private final MemberRepository memberRepository;
     private final InputRepository inputRepository;
 
@@ -59,11 +58,11 @@ public class InputService {
                 .build();
     }
 
-/*    @Transactional(readOnly = true)
+    @Transactional(readOnly = true)
     public ResultDto getResponse(Long operationId, String link) {
-        Operation operation = getAuthOperation(operationId, link);
-        List<Input> inputs = operation.getInputs();
-        int length = operation.getInputs().size();
+        Member member = getAuthOperation(operationId, link);
+        List<Input> inputs = member.getInputs();
+        int length = member.getInputs().size();
         List<ResultForm> result = new ArrayList<>();
         for (int i = 0; i < 3; i++) {
             Input input = inputs.get((int) (Math.random() * length));
@@ -74,5 +73,5 @@ public class InputService {
             );
         }
         return new ResultDto(result);
-    }*/
+    }
 }
