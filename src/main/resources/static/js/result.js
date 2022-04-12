@@ -6,6 +6,9 @@ const addResultEvent = () => {
     const inputsButton = document.getElementById('btn-get-inputs');
     inputsButton.addEventListener('click', renderInputs);
 
+    const initButton = document.getElementById("btn-init-input");
+    initButton.addEventListener("click",renderInit);
+
     const goListButton = document.getElementById('btn-go-listPage');
     goListButton.addEventListener('click', goListPage);
 };
@@ -27,6 +30,9 @@ const toggleButton = () => {
 
     const inputsButton = document.getElementById('btn-get-inputs');
     inputsButton.classList.toggle('d-none');
+
+    const initButton = document.getElementById("btn-init-input");
+    initButton.classList.toggle("d-none");
 };
 
 const getResult = async () => {
@@ -39,7 +45,7 @@ const getResult = async () => {
 
 const goListPage = () => {
     location.href = location.origin + `/operations/${getLink()}`;
-}
+};
 
 const renderInputs = async () => {
     const inputs = await getInputs();
@@ -58,6 +64,11 @@ const getInputs = async () => {
     };
     const response = await fetchData(`/api/auth/operations/${getLink()}/inputs`, header);
     return response.inputs;
+};
+
+const renderInit = () =>{
+    const link = getLink();
+    location.href = location.origin+`/operations/${link}`;
 };
 
 addResultEvent();
