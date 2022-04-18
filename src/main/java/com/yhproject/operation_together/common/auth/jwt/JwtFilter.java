@@ -1,5 +1,8 @@
 package com.yhproject.operation_together.common.auth.jwt;
 
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -10,6 +13,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.MalformedInputException;
 
 @RequiredArgsConstructor
 @WebFilter(urlPatterns = "/api/auth/*")
@@ -23,13 +27,22 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwt = resolveToken(request);
-        if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
-            Long operationId = jwtTokenProvider.getOperationId(jwt);
-            request.setAttribute("operationId", operationId);
-            filterChain.doFilter(request, response);
-            return;
+        try{
+            if (StringUtils.hasText(jwt) && jwtTokenProvider.validateToken(jwt)) {
+                Long operationId = jwtTokenProvider.getOperationId(jwt);
+                request.setAttribute("operationId", operationId);
+                filterChain.doFilter(request, response);
+                return;
+            }
+        }catch(MalformedInputException e){
+            response.sendError(401,"손상된 토큰입니다.");
+        }catch (ExpiredJwtException e){
+            response.sendError(401,"만료된 토큰입니다.");
+        }catch (UnsupportedJwtException e){
+            response.sendError(401,"지원하지 않는 토큰입니다.");
+        }catch (SignatureException e){
+            response.sendError(401,"시그니처 검증에 실패한 토큰입니다.");
         }
-        response.sendError(401);
     }
 
     private String resolveToken(HttpServletRequest request) {
